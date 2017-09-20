@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import './w3.css';
 import Lista from './components/Lista';
 
 class App extends Component {

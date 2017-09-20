@@ -3,13 +3,13 @@ import React from 'react';
 const FiltroLink = ({children, filtro, current, onClick}) => (
   <span>
   	{current === filtro?
-  		<span>{children}</span>
+  		<span className="w3-btn w3-blue">{children}</span>
   		:
-  		<a
+  		<button  className=" w3-btn"
   		onClick={onClick}
   		href="#!">
         	{children}
-        </a>
+        </button>
   	}
   </span>
 );
