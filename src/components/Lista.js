@@ -1,10 +1,17 @@
 import React from 'react';
 import FiltroLink from './FiltroLink';
+// Se debe importar connect para poder utilizar el store
+// Lo que hace es que transforma o conecta el store como
+// props
+
 import {connect} from 'react-redux';
+// se importan las actions
 import * as comprasActions from '../actions/comprasActions';
 import * as filtroActions from '../actions/filtroActions';
+// para convertir todas las dispatchers como una funcion
 import {bindActionCreators} from 'redux';
 
+// Declaración de estilos
 const w3margin = {
   marginBottom: 20
 };
@@ -14,30 +21,35 @@ const interno = {
     padding:'10px 10vw'
 };
 
-
+//end declaracion
 
 class Lista extends React.Component{
+    //Creacion de state local
     state = {
         items:[],
         nuevoItem:''
-    }
+    };
   
 
-  
+    //manejar el cambio de los inputs
     handleChange = (e) => {
         const nuevoItem = e.target.value;
         this.setState({nuevoItem});
     };
   
 
-
+    // Agregar la compra
     addCompra = (e) => {
+        // transformación del item a objeto
         const item = {
             text: this.state.nuevoItem,
             key: this.state.nuevoItem,
             comprado:false
         };
         e.preventDefault();
+        // dispatch la accion, se va a la funcion
+        // devuelve la accion (objeto ) y se lo
+        // pasa al dispatch
         this.props.comprasActions.addCompra(item);
         this.setState({nuevoItem:''});
     };
@@ -49,6 +61,7 @@ class Lista extends React.Component{
         }
     };
 
+    //sirve para filtrar los items del store
     filterItems = (losItems, filtro) => {
         switch(filtro){
             case "SHOW_ACTIVOS":
@@ -71,6 +84,7 @@ class Lista extends React.Component{
         const items = this.filterItems(losItems, filtro);
         console.log(items, filtro);
 
+        //sirve para mostrar el titulo de la lista y sus animaciones
         let tituloFiltro = '';
         let animacion = '';
         switch (filtro){
@@ -102,6 +116,7 @@ class Lista extends React.Component{
                         <div className="w3-twothird">
                             <label htmlFor="nuevoItem">Nuevo artículo: </label>
                             <input
+                                required
                                 placeholder="ej. Arroz"
                                 name="nuevoItem"
                                 className="w3-input"
@@ -151,7 +166,7 @@ class Lista extends React.Component{
                                 items.map(i=>
                                     <li
                                         key={i.key}
-                                        className="w3-display-container">
+                                        className="w3-display-container w3-padding-16">
                                         <span
                                             onClick={()=>this.props.comprasActions.checkComprado(i)}
                                             style={{cursor:'pointer'}}
@@ -180,13 +195,28 @@ class Lista extends React.Component{
  
 }
 
-
+/*
+    Se crean estas funciones para lo siguiente:
+    mapStateToProps, convierte el store a props
+    debe retornar un objeto clave valor
+    clave es en el nombre de los props
+    valor es el campo del store
+ */
 function mapStateToProps(state, ownProps){
   return {
     compras:state.compras,
     filtro:state.filtro
   }
 }
+
+/*
+   mapDispatchToProps hace posible usar dispatchers como funciones
+   solo se debe  retornar las acciones como objetos y automaticamente
+   se lanza el dispatch, debe retornar un objeto
+   clave es el nombre del prop, valor se debe mandar llamar bind
+   ActionCreators primer parametro el action (una funcion que devuelve
+   el objeto de acción ) y  dispatch
+ */
 
 function mapDispatchToProps(dispatch){
   return {
@@ -196,4 +226,5 @@ function mapDispatchToProps(dispatch){
   }
 }
 
+//Se deben conectar las funciones a la lista
 export default connect(mapStateToProps, mapDispatchToProps)(Lista);

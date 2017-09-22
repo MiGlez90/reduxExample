@@ -1,3 +1,4 @@
+// hace lo mismo que compras Reducer ver compras Reducer para explicación
 export default function filtroReducer(state = "SHOW_TODOS", action){
   switch(action.type){
     case "SHOW_ACTIVOS":
