@@ -161,8 +161,9 @@ class Lista extends React.Component{
                         <h2 className={animacion} style={{color:'#2196F3'}}>{tituloFiltro}</h2>
 
 
-                        <ul className="w3-ul w3-card-4">
+                        <ul className={"w3-ul w3-card-4 " + animacion}>
                             {
+                               items.length !== 0 ?
                                 items.map(i=>
                                     <li
                                         key={i.key}
@@ -179,7 +180,12 @@ class Lista extends React.Component{
                                             &times;
                                         </span>
                                     </li>
-                                )
+
+                                ):
+                                <li className="w3-display-container w3-padding-16">
+                                    No hay artículos
+                                </li>
+
                             }
                             </ul>
 
