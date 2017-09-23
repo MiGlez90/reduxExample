@@ -53,19 +53,30 @@ import registerServiceWorker from './registerServiceWorker';
 /* Primer paso: se debe instalar redux y react redux
  * se debe importar createStore y Provider
  * */
-import {createStore} from 'redux';
+//import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
 //Se debe de importar un combine reducer (si hay más de 1 modelo
-import rootReducer from './store/rootReducer';
+//import rootReducer from './store/rootReducer';
 import './index.css';
+import configureStore from "./store/configureStore";
+import {loadListaCompras} from "./actions/comprasActions";
 
 //Segundo paso es construir el store global (state),  éste  debe
 // ir en index.js,  recibe  como  parametro  un reducer, en este
 // caso, rootReducer es un combine reducer, por que tenemos  más
 // de una variable en nuestro state
-const store = createStore(rootReducer);
 
+// esto se hace si no hay funciones asincronas no thunks
+// const store = createStore(rootReducer);
+
+//esto si hay funciones asincronas
+const store = configureStore();
+
+//Se llena la lista de compras por primera vez
+//Para ello se ejecuta su thunk correspondiente
+
+store.dispatch(loadListaCompras());
 
 /*
     Tercer paso: debemos construir un componente de presentacion

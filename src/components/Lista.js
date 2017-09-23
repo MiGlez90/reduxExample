@@ -50,14 +50,14 @@ class Lista extends React.Component{
         // dispatch la accion, se va a la funcion
         // devuelve la accion (objeto ) y se lo
         // pasa al dispatch
-        this.props.comprasActions.addCompra(item);
+        this.props.comprasActions.saveCompra(item);
         this.setState({nuevoItem:''});
     };
 
     deleteCompra = (i) => {
         if(window.confirm("Estas seguro de borrarlo?")){
           //store.dispatch({type:"DELETE_COMPRA", compra:i});
-          this.props.comprasActions.deleteCompra(i);
+          this.props.comprasActions.removeCompra(i);
         }
     };
 
@@ -169,7 +169,7 @@ class Lista extends React.Component{
                                         key={i.key}
                                         className="w3-display-container w3-padding-16">
                                         <span
-                                            onClick={()=>this.props.comprasActions.checkComprado(i)}
+                                            onClick={()=>this.props.comprasActions.toggleCompra(i)}
                                             style={{cursor:'pointer'}}
                                             className={i.comprado?"tachado":null}>
                                             {i.text}

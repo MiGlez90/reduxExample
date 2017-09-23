@@ -17,6 +17,8 @@ export default function comprasReducer(state = [], action){
     // se debe poner un switch para ver que tipo de action le llega
     // De acuerdo al tipo hace su accion correspondiente
     switch(action.type){
+        case "LOAD_COMPRAS":
+            return action.compras;
         // En este caso, si el tipo o la accion es "ADD COMPRA"
         // Un dato importante es que el state nunca debe ser mutado
         case "ADD_COMPRA":
