@@ -13,9 +13,6 @@ import {bindActionCreators} from 'redux';
 import {AppBar,TextField, RaisedButton} from 'material-ui'
 
 // Declaración de estilos
-const w3margin = {
-  marginBottom: 20
-};
 
 const interno = {
     margin:10,
@@ -28,12 +25,14 @@ class Lista extends React.Component{
     //Creacion de state local
     state = {
         items:[],
-        nuevoItem:''
+        nuevoItem:'',
+        empty:true
     };
   
 
     //manejar el cambio de los inputs
     handleChange = (e) => {
+        this.setState({empty:false});
         const nuevoItem = e.target.value;
         this.setState({nuevoItem});
     };
@@ -52,7 +51,7 @@ class Lista extends React.Component{
         // devuelve la accion (objeto ) y se lo
         // pasa al dispatch
         this.props.comprasActions.saveCompra(item);
-        this.setState({nuevoItem:''});
+        this.setState({nuevoItem:'',empty:false});
     };
 
     deleteCompra = (i) => {
@@ -112,6 +111,7 @@ class Lista extends React.Component{
                 <div style={{width:'100vw'}} >
                     <AppBar
                         title="Lista de compras"
+                        showMenuIconButton={false}
                     />
                     {/*iconClassNameRight="muidocs-icon-navigation-expand-more"*/}
                     {/*<div className="w3-container w3-blue" style={w3margin} >*/}
@@ -119,23 +119,27 @@ class Lista extends React.Component{
                     {/*</div>*/}
                     <form className="w3-row-padding" style={interno} onSubmit={this.addCompra}>
                         <div style={{display:'inline'}}>
-                            <TextField
-                                required
-                                value={nuevoItem}
-                                onChange={this.handleChange}
-                                name="nuevoItem"
-                                hintText="ej Arroz"
-                                floatingLabelText="Nuevo artículo"
-                            />
 
-                            <RaisedButton type="submit" label="Guardar" primary={true} style={{margin:20}} />
+                                <TextField
+                                    required
+                                    value={nuevoItem}
+                                    onChange={this.handleChange}
+                                    name="nuevoItem"
+                                    hintText="ej Arroz"
+                                    floatingLabelText="Nuevo artículo"
+                                    style={{width:'65vw'}}
+                                    errorText={this.state.nuevoItem == '' && !this.state.empty ? 'Debe introducir un artículo' : ''}
+                                />
+
+
+                                <RaisedButton type="submit" label="Guardar" primary={true} style={{margin:20,position:'fixed'}} />
 
                         </div>
 
 
                     </form>
                     <div style={interno}>
-                        <h3>Filtro: </h3>
+                        <h2 style={{color:'#00BCD4'}}>Filtro: </h2>
                         <FiltroLink
                             filtro="SHOW_TODOS"
                             current={filtro}
@@ -162,7 +166,7 @@ class Lista extends React.Component{
                     </div>
 
                     <div style={interno}>
-                        <h2 className={animacion} style={{color:'#2196F3'}}>{tituloFiltro}</h2>
+                        <h2 className={animacion} style={{color:'#00BCD4'}}>{tituloFiltro}</h2>
 
 
                         <ul className={"w3-ul w3-card-4 " + animacion}>
