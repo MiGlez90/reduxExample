@@ -1,15 +1,19 @@
 import React from 'react';
+import {FlatButton,RaisedButton} from 'material-ui';
 
 const FiltroLink = ({children, filtro, current, onClick}) => (
   <span>
   	{current === filtro?
-  		<span className="w3-btn w3-blue">{children}</span>
+        <RaisedButton
+          label={children}
+          primary={true}
+        />
   		:
-  		<button  className=" w3-btn"
-  		onClick={onClick}
-  		href="#!">
-        	{children}
-        </button>
+        <FlatButton
+            label={children}
+            primary={true}
+            onClick={onClick}
+        />
   	}
   </span>
 );

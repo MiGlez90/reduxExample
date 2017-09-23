@@ -61,6 +61,8 @@ import {Provider} from 'react-redux';
 import './index.css';
 import configureStore from "./store/configureStore";
 import {loadListaCompras} from "./actions/comprasActions";
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 //Segundo paso es construir el store global (state),  éste  debe
 // ir en index.js,  recibe  como  parametro  un reducer, en este
@@ -86,6 +88,9 @@ store.dispatch(loadListaCompras());
     tengan acceso al store
  */
 
+injectTapEventPlugin();
+
+
 const WithProvider = () => (
     //Como props se le debe de mandar el state (store)
     <Provider store={store}>
@@ -93,6 +98,12 @@ const WithProvider = () => (
     </Provider>
 );
 
+const Mui = () => (
+    <MuiThemeProvider>
+        <WithProvider />
+    </MuiThemeProvider>
+);
+
 //Se renderiza nuestro Provider
-ReactDOM.render(<WithProvider />, document.getElementById('root'));
+ReactDOM.render(<Mui/>, document.getElementById('root'));
 registerServiceWorker();

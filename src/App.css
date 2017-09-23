@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
 .App {
   display: flex;
     justify-content: center;
     /*align-content: center;*/
     align-items: center;
     width: 100vw;
+  font-family: Roboto, SansSerif, Consolas, "courier new";
     /*height: 100vh;*/
 
 

@@ -10,6 +10,7 @@ import * as comprasActions from '../actions/comprasActions';
 import * as filtroActions from '../actions/filtroActions';
 // para convertir todas las dispatchers como una funcion
 import {bindActionCreators} from 'redux';
+import {AppBar,TextField, RaisedButton} from 'material-ui'
 
 // Declaración de estilos
 const w3margin = {
@@ -109,25 +110,28 @@ class Lista extends React.Component{
         return(
             <div className="App">
                 <div style={{width:'100vw'}} >
-                    <div className="w3-container w3-blue" style={w3margin} >
-                        <h1 className="w3-animate-top">Lista de compras</h1>
-                    </div>
+                    <AppBar
+                        title="Lista de compras"
+                    />
+                    {/*iconClassNameRight="muidocs-icon-navigation-expand-more"*/}
+                    {/*<div className="w3-container w3-blue" style={w3margin} >*/}
+                        {/*<h1 className="w3-animate-top">Lista de compras</h1>*/}
+                    {/*</div>*/}
                     <form className="w3-row-padding" style={interno} onSubmit={this.addCompra}>
-                        <div className="w3-twothird">
-                            <label htmlFor="nuevoItem">Nuevo artículo: </label>
-                            <input
+                        <div style={{display:'inline'}}>
+                            <TextField
                                 required
-                                placeholder="ej. Arroz"
-                                name="nuevoItem"
-                                className="w3-input"
                                 value={nuevoItem}
                                 onChange={this.handleChange}
-                                type="text" />
+                                name="nuevoItem"
+                                hintText="ej Arroz"
+                                floatingLabelText="Nuevo artículo"
+                            />
+
+                            <RaisedButton type="submit" label="Guardar" primary={true} style={{margin:20}} />
 
                         </div>
-                        <div className="w3-third">
-                            <button className="w3-btn w3-blue" > Enviar </button>
-                        </div>
+
 
                     </form>
                     <div style={interno}>
