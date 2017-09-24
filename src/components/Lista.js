@@ -15,7 +15,7 @@ import {AppBar,TextField, RaisedButton} from 'material-ui'
 // Declaración de estilos
 
 const interno = {
-    margin:10,
+    margin:5,
     padding:'10px 10vw'
 };
 
@@ -117,29 +117,29 @@ class Lista extends React.Component{
                     {/*<div className="w3-container w3-blue" style={w3margin} >*/}
                         {/*<h1 className="w3-animate-top">Lista de compras</h1>*/}
                     {/*</div>*/}
-                    <form className="w3-row-padding" style={interno} onSubmit={this.addCompra}>
-                        <div style={{display:'inline'}}>
-
-                                <TextField
-                                    required
-                                    value={nuevoItem}
-                                    onChange={this.handleChange}
-                                    name="nuevoItem"
-                                    hintText="ej Arroz"
-                                    floatingLabelText="Nuevo artículo"
-                                    style={{width:'65vw'}}
-                                    errorText={this.state.nuevoItem == '' && !this.state.empty ? 'Debe introducir un artículo' : ''}
-                                />
-
-
-                                <RaisedButton type="submit" label="Guardar" primary={true} style={{margin:20,position:'fixed'}} />
-
+                    <form onSubmit={this.addCompra}>
+                        <div style={interno} className="w3-row-padding">
+                            <div className="w3-twothird w3-container">
+                                    <TextField
+                                        required
+                                        value={nuevoItem}
+                                        onChange={this.handleChange}
+                                        name="nuevoItem"
+                                        hintText="ej Arroz"
+                                        floatingLabelText="Nuevo artículo"
+                                        fullWidth={true}
+                                        errorText={this.state.nuevoItem == '' && !this.state.empty ? 'Debe introducir un artículo' : ''}
+                                    />
+                                </div>
+                                <div className="w3-third w3-container">
+                                    <RaisedButton type="submit" label="Guardar" primary={true} style={{margin:20}} />
+                                </div>
                         </div>
-
-
                     </form>
-                    <div style={interno}>
-                        <h2 style={{color:'#00BCD4'}}>Filtro: </h2>
+                    <div className="w3-row-padding">
+                        <h2 className="w3-container w3-third"  style={{color:'#00BCD4',padding:'10px 10vw'}}>Filtro: </h2>
+                    </div>
+                    <div className="w3-row-padding" style={interno}>
                         <FiltroLink
                             filtro="SHOW_TODOS"
                             current={filtro}
